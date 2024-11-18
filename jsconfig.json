@@ -1,7 +1,16 @@
 {
   "compilerOptions": {
+    "baseUrl": ".", 
     "paths": {
-      "@/*": ["./src/*"]
-    }
-  }
+      "@/*": ["./src/*"] 
+    },
+    "strict": true, 
+    "jsx": "preserve", 
+    "module": "esnext", 
+    "esModuleInterop": true, 
+    "resolveJsonModule": true, 
+    "incremental": true 
+  },
+  "include": ["src/**/*"], 
+  "exclude": ["node_modules", "dist"] 
 }
