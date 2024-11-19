@@ -32,7 +32,7 @@ const BestSellingProductsChart = () => {
     ],
   };
   return (
-    <div className="p-8 rounded-lg bg-slate-700">
+    <div className="p-8 border rounded-lg dark:border-none dark:bg-slate-700 bg-slate-100 text-slate-800 dark:text-slate-50">
       <h2 className="mb-5 text-xl font-bold">
         Best Selling Products Chart
       </h2>

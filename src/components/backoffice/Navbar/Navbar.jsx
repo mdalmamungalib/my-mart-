@@ -25,13 +25,13 @@ import ThemeSwitcherBtn from "@/components/ThemeSwitcherBtn/ThemeSwitcherBtn";
 
 const Navbar = () => {
   return (
-    <div className="flex items-center justify-between bg-[#122136]  h-16 z-50 px-8 py-8 fixed w-full text-[#04bd7f]">
+    <div className="flex items-center justify-between bg-slate-100 dark:bg-[#122136] h-16 z-50 px-8 py-8 fixed w-full text-[#04bd7f]">
       {/* icon */}
       <button>
         <AlignJustify />
       </button>
       {/* 3 icon */}
-      <div className="flex space-x-3">
+      <div className="flex pr-56 space-x-3">
         
         
         <ThemeSwitcherBtn/>
@@ -101,7 +101,7 @@ const Navbar = () => {
               />
             </button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent className="pl-4 pr-10">
+          <DropdownMenuContent className="pl-4 pr-28">
             <DropdownMenuLabel>My Account</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <DropdownMenuItem>

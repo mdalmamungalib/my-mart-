@@ -87,8 +87,8 @@ const WeeklySalesChart = () => {
     tabs[0].type
   );
   return (
-    <div className="p-8 rounded-lg bg-slate-700">
-      <h2 className="text-xl font-bold mb4">Weekly Charts</h2>
+    <div className="p-8 border rounded-lg dark:border-none dark:bg-slate-700 bg-slate-100 text-slate-800 dark:text-slate-50">
+      <h2 className="mb-4 text-xl font-bold">Weekly Charts</h2>
       {/* Tabs */}
 
       <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-500 dark:text-gray-400 dark:border-gray-700">

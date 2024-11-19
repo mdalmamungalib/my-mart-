@@ -18,7 +18,9 @@ const CustomDataTable = () => {
 
   return (
     <div>
-      <h2 className="mb-4 text-xl font-bold">Recent Orders</h2>
+      <h2 className="mb-4 text-xl font-bold dark:text-slate-50 text-slate-800">
+        Recent Orders
+      </h2>
       {/* Table */}
       <div className="p-8">
         <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
@@ -113,11 +115,11 @@ const CustomDataTable = () => {
           >
             <span className="block w-full mb-4 text-sm font-normal text-gray-500 dark:text-gray-400 md:mb-0 md:inline md:w-auto">
               Showing{" "}
-              <span className="font-semibold text-gray-50 dark:text-white">
+              <span className="font-semibold text-slate-800 dark:text-white">
                 {itemStartIndex}-{itemEndIndex}
               </span>{" "}
               of{" "}
-              <span className="font-semibold text-gray-50 dark:text-white">
+              <span className="font-semibold text-slate-800 dark:text-white">
                 {data?.length}
               </span>
             </span>
@@ -132,78 +134,77 @@ const CustomDataTable = () => {
                 </button>
               </li>
               {
-  <>
-    {/* First Button */}
-    <li>
-      <button
-        onClick={() => SetCurrentPage(1)}
-        disabled={currentPage === 1}
-        className="flex items-center justify-center h-10 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-      >
-        First
-      </button>
-    </li>
+                <>
+                  {/* First Button */}
+                  <li>
+                    <button
+                      onClick={() => SetCurrentPage(1)}
+                      disabled={currentPage === 1}
+                      className="flex items-center justify-center h-10 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    >
+                      First
+                    </button>
+                  </li>
 
-    {/* Left Ellipsis if needed */}
-    {currentPage > 4 && (
-      <li>
-        <span className="flex items-center justify-center h-10 px-3 text-gray-500">
-          ...
-        </span>
-      </li>
-    )}
+                  {/* Left Ellipsis if needed */}
+                  {currentPage > 4 && (
+                    <li>
+                      <span className="flex items-center justify-center h-10 px-3 text-gray-500">
+                        ...
+                      </span>
+                    </li>
+                  )}
 
-    {/* Dynamic Pages */}
-    {Array.from(
-      { length: Math.min(5, totalPages) },
-      (_, i) => {
-        const startPage = Math.max(
-          1,
-          Math.min(currentPage - 2, totalPages - 4)
-        );
-        const page = startPage + i;
+                  {/* Dynamic Pages */}
+                  {Array.from(
+                    { length: Math.min(5, totalPages) },
+                    (_, i) => {
+                      const startPage = Math.max(
+                        1,
+                        Math.min(currentPage - 2, totalPages - 4)
+                      );
+                      const page = startPage + i;
 
-        return (
-          <li key={page}>
-            <button
-              onClick={() => SetCurrentPage(page)}
-              disabled={currentPage === page}
-              className={
-                currentPage === page
-                  ? "flex items-center justify-center h-10 px-3 leading-tight text-gray-50 bg-blue-600 border border-blue-300 hover:bg-blue-800 hover:text-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-                  : "flex items-center justify-center h-10 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                      return (
+                        <li key={page}>
+                          <button
+                            onClick={() => SetCurrentPage(page)}
+                            disabled={currentPage === page}
+                            className={
+                              currentPage === page
+                                ? "flex items-center justify-center h-10 px-3 leading-tight text-gray-50 bg-blue-600 border border-blue-300 hover:bg-blue-800 hover:text-white dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                                : "flex items-center justify-center h-10 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                            }
+                          >
+                            {page}
+                          </button>
+                        </li>
+                      );
+                    }
+                  )}
+
+                  {/* Right Ellipsis if needed */}
+                  {currentPage < totalPages - 3 && (
+                    <li>
+                      <span className="flex items-center justify-center h-10 px-3 text-gray-500">
+                        ...
+                      </span>
+                    </li>
+                  )}
+
+                  {/* Last Button */}
+                  <li>
+                    <button
+                      onClick={() => SetCurrentPage(totalPages)}
+                      disabled={currentPage === totalPages}
+                      className="flex items-center justify-center h-10 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+                    >
+                      Last
+                    </button>
+                  </li>
+                </>
               }
-            >
-              {page}
-            </button>
-          </li>
-        );
-      }
-    )}
 
-    {/* Right Ellipsis if needed */}
-    {currentPage < totalPages - 3 && (
-      <li>
-        <span className="flex items-center justify-center h-10 px-3 text-gray-500">
-          ...
-        </span>
-      </li>
-    )}
-
-    {/* Last Button */}
-    <li>
-      <button
-        onClick={() => SetCurrentPage(totalPages)}
-        disabled={currentPage === totalPages}
-        className="flex items-center justify-center h-10 px-3 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-      >
-        Last
-      </button>
-    </li>
-  </>
-}
-
-             
               <li>
                 <button
                   onClick={() => SetCurrentPage(currentPage + 1)}

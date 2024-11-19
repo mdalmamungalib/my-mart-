@@ -22,20 +22,21 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <div className="flex">
-      {/* sidebar */}
+      {/* Sidebar */}
       <Sidebar />
 
-      <div className="w-full">
-        {/* header */}
-        <div className="">
+      {/* Content Area */}
+      <div className="w-full ml-0 lg:ml-60">
+        {/* Navbar */}
+        <div>
           <Navbar />
         </div>
-        {/* main */}
-        <main className="p-8 bg-slate-100 dark:bg-[#19192B] text-teal-50 min-h-screen mt-16 ml-60">
+        {/* Main Content */}
+        <main className="p-8 bg-slate-100 dark:bg-[#19192B] dark:text-teal-50 
+        text-slate-800 min-h-screen pt-20">
           {children}
         </main>
       </div>
-      {/* main body */}
     </div>
   );
 }
