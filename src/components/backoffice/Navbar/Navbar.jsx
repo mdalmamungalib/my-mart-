@@ -18,8 +18,8 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import ThemeSwitcherBtn from "@/components/ThemeSwitcherBtn/ThemeSwitcherBtn";
+} from "../../../components/ui/dropdown-menu";
+import ThemeSwitcherBtn from "../../../components/ThemeSwitcherBtn/ThemeSwitcherBtn";
 
 
 
