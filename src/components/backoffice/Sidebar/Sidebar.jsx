@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Link from "next/link";
 import Image from "next/image";
 import React from "react";
@@ -13,23 +13,22 @@ import {
   User,
   Settings,
   Radar,
-  LogOut
+  LogOut,
+  ChevronRight,
+  Minus,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible"
+
+
 const Sidebar = () => {
-  const pathname = usePathname()
+  const pathname = usePathname();
   const sidebarLinks = [
-    {
-      title: "Dashboard",
-      link: "/dashboard",
-      icons: LayoutDashboard,
-    },
-    {
-      title: "Catalogue",
-      link: "/dashboard/catalogue",
-      icons: Slack,
-    },
     {
       title: "Customers",
       link: "/dashboard/customers",
@@ -60,11 +59,30 @@ const Sidebar = () => {
       link: "/dashboard/settings",
       icons: Settings,
     },
-    
+
     {
       title: "Online Store",
       link: "/dashboard/onlinestore",
       icons: Radar,
+    },
+  ];
+
+  const catalogDropdown = [
+    {
+      title: "Products",
+      link: "/dashboard/products",
+    },
+    {
+      title: "Categories",
+      link: "/dashboard/categories",
+    },
+    {
+      title: "Attributes",
+      link: "/dashboard/attributes",
+    },
+    {
+      title: "Coupons",
+      link: "/dashboard/coupons",
     },
   ];
 
@@ -87,13 +105,65 @@ const Sidebar = () => {
         />
       </Link>
       <div className="flex flex-col space-y-3 ">
+        <Link
+          href={"/dashboard"}
+          className={
+            pathname === "/dashboard"
+              ? "flex items-center px-6 py-2 space-x-3 border-l-4 border-green-600 rounded text-[#04bd7f]"
+              : "flex items-center px-6 py-2 space-x-3"
+          }
+        >
+          {" "}
+          <LayoutDashboard />
+          <span>Dashboard</span>
+        </Link>
+        {/* Catalogue */}
+
+        <Collapsible className="px-6 ">
+          <CollapsibleTrigger>
+            <button
+              className={"flex items-center py-2 space-x-6"}
+            >
+              <div className="flex items-center space-x-3">
+                <Slack />
+                <span>Catalogue</span>
+              </div>
+              <ChevronRight />
+            </button>
+          </CollapsibleTrigger>
+          <CollapsibleContent className="px-3 py-3 pl-6 rounded-md bg-slate-900">
+                {catalogDropdown.map((item, index) => {
+                  return (
+                   
+                    <Link
+                      key={index}
+                      href={item?.link}
+                      className={
+                        item?.link === pathname
+                          ? "flex items-center   space-x-3  text-white"
+                          : "flex items-center   space-x-3 text-slate-700 text-sm hover:text-white"
+                      }
+                    >
+                      <Minus/>
+                      <span>{item?.title}</span>
+                    </Link>
+                    
+                  );
+                })}
+            </CollapsibleContent>
+        </Collapsible>
+
         {sidebarLinks.map((item, index) => {
-          const Icon = item?.icons
+          const Icon = item?.icons;
           return (
             <Link
               key={index}
               href={item?.link}
-              className={item?.link === pathname ? "flex items-center px-6 py-2 space-x-3 border-l-4 border-green-600 rounded text-[#04bd7f]" : "flex items-center px-6 py-2 space-x-3"}
+              className={
+                item?.link === pathname
+                  ? "flex items-center px-6 py-2 space-x-3 border-l-4 border-green-600 rounded text-[#04bd7f]"
+                  : "flex items-center px-6 py-2 space-x-3"
+              }
             >
               {" "}
               <Icon />
@@ -102,10 +172,10 @@ const Sidebar = () => {
           );
         })}
         <div className="px-6 py-2">
-        <button className="flex items-center justify-center px-14 py-3 bg-[#04bd7f] rounded-xl space-x-2">
-          <LogOut/>
-          <span>Logout</span>
-        </button>
+          <button className="flex items-center justify-center px-14 py-3 bg-[#04bd7f] rounded-xl space-x-2">
+            <LogOut />
+            <span>Logout</span>
+          </button>
         </div>
       </div>
     </div>
