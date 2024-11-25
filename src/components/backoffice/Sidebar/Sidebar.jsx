@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import Logo from "../../../app/Logo.svg";
 import {
   LayoutDashboard,
@@ -16,6 +16,7 @@ import {
   LogOut,
   ChevronRight,
   Minus,
+  ChevronDown,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -23,10 +24,9 @@ import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible"
+} from "@/components/ui/collapsible";
 
-
-const Sidebar = () => {
+const Sidebar = ({ showSidebar }) => {
   const pathname = usePathname();
   const sidebarLinks = [
     {
@@ -86,14 +86,17 @@ const Sidebar = () => {
     },
   ];
 
+  const [openMenu, setOpenMenu] = useState(false);
   return (
     <div
-      className="dark:bg-[#122136]  bg-slate-100 space-y-6 w-60 h-full 
-    dark:text-teal-50 text-slate-800 
-     pt-0 fixed left-0 top-0 "
+      className={
+        showSidebar
+          ? "dark:bg-[#122136]  bg-slate-100 space-y-6 w-60 h-full dark:text-teal-50 text-slate-800 pt-0 fixed left-0 top-0 sm:block"
+          : "dark:bg-[#122136]  bg-slate-100 space-y-6 w-60 h-full dark:text-teal-50 text-slate-800 pt-0 fixed left-0 top-0 hidden sm:block"
+      }
     >
       <Link
-        className="flex items-center justify-center mb-0"
+        className="flex items-center justify-center mt-10 mb-0 sm:mt-0"
         href={"/"}
       >
         <Image
@@ -101,7 +104,7 @@ const Sidebar = () => {
           width={100}
           height={100}
           alt="Logo"
-          className="w-40 h-32 -mt-8"
+          className="w-40 h-32 mb-0 sm:-mt-8"
         />
       </Link>
       <div className="flex flex-col space-y-3 ">
@@ -120,37 +123,39 @@ const Sidebar = () => {
         {/* Catalogue */}
 
         <Collapsible className="px-6 ">
-          <CollapsibleTrigger>
-            <button
-              className={"flex items-center py-2 space-x-6"}
-            >
+          <CollapsibleTrigger
+            onClick={() => setOpenMenu(!openMenu)}
+          >
+            <button className={"flex items-center py-2 space-x-6"}>
               <div className="flex items-center space-x-3">
                 <Slack />
                 <span>Catalogue</span>
               </div>
-              <ChevronRight />
+              {openMenu === false ? (
+                <ChevronRight />
+              ) : (
+                <ChevronDown />
+              )}
             </button>
           </CollapsibleTrigger>
-          <CollapsibleContent className="px-3 py-3 pl-6 rounded-md bg-slate-900">
-                {catalogDropdown.map((item, index) => {
-                  return (
-                   
-                    <Link
-                      key={index}
-                      href={item?.link}
-                      className={
-                        item?.link === pathname
-                          ? "flex items-center   space-x-3  text-white"
-                          : "flex items-center   space-x-3 text-slate-700 text-sm hover:text-white"
-                      }
-                    >
-                      <Minus/>
-                      <span>{item?.title}</span>
-                    </Link>
-                    
-                  );
-                })}
-            </CollapsibleContent>
+          <CollapsibleContent className="px-3 py-3 pl-6 rounded-md dark:bg-slate-900 bg-slate-200">
+            {catalogDropdown.map((item, index) => {
+              return (
+                <Link
+                  key={index}
+                  href={item?.link}
+                  className={
+                    item?.link === pathname
+                      ? "flex items-center space-x-3 dark:text-white text-slate-400"
+                      : "flex items-center space-x-3 text-slate-700 text-sm  hover:text-slate-400 dark:hover:text-white"
+                  }
+                >
+                  <Minus />
+                  <span>{item?.title}</span>
+                </Link>
+              );
+            })}
+          </CollapsibleContent>
         </Collapsible>
 
         {sidebarLinks.map((item, index) => {
