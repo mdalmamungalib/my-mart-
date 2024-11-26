@@ -29,7 +29,7 @@ const Navbar = ({ setShowSideBar, showSidebar }) => {
         <AlignJustify />
       </button>
       {/* 3 icon */}
-      <div className="flex pr-56 space-x-3">
+      <div className="flex space-x-3 sm:pr-56">
         <ThemeSwitcherBtn />
 
         <DropdownMenu>

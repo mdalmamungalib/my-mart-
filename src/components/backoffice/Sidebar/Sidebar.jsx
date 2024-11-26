@@ -109,6 +109,7 @@ const Sidebar = ({ showSidebar }) => {
       </Link>
       <div className="flex flex-col space-y-3 ">
         <Link
+          onClick={() => showSidebar(false)}
           href={"/dashboard"}
           className={
             pathname === "/dashboard"
@@ -142,6 +143,7 @@ const Sidebar = ({ showSidebar }) => {
             {catalogDropdown.map((item, index) => {
               return (
                 <Link
+                  onClick={() => showSidebar(false)}
                   key={index}
                   href={item?.link}
                   className={
@@ -162,6 +164,7 @@ const Sidebar = ({ showSidebar }) => {
           const Icon = item?.icons;
           return (
             <Link
+              onClick={() => showSidebar(false)}
               key={index}
               href={item?.link}
               className={
