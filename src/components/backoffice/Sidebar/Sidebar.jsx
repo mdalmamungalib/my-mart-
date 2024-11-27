@@ -91,8 +91,8 @@ const Sidebar = ({ showSidebar }) => {
     <div
       className={
         showSidebar
-          ? "dark:bg-[#122136]  bg-slate-100 space-y-6 w-60 h-full dark:text-teal-50 text-slate-800 pt-0 fixed left-0 top-0 sm:block"
-          : "dark:bg-[#122136]  bg-slate-100 space-y-6 w-60 h-full dark:text-teal-50 text-slate-800 pt-0 fixed left-0 top-0 hidden sm:block"
+          ? "dark:bg-[#122136]  bg-slate-100 space-y-6 w-60 h-full dark:text-teal-50 text-slate-800 pt-0 fixed left-0 top-0 sm:block overflow-y-scroll"
+          : "dark:bg-[#122136]  bg-slate-100 space-y-6 w-60 h-full dark:text-teal-50 text-slate-800 pt-0 fixed left-0 top-0 hidden sm:block overflow-y-scroll"
       }
     >
       <Link
