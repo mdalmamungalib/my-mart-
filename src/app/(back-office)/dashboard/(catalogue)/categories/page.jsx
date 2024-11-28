@@ -1,6 +1,6 @@
-import Heading from "components/backoffice/Heading/Heading";
-import PageHeader from "components/backoffice/PageHeader/PageHeader";
-import TableActions from "components/backoffice/TableActions/TableActions";
+import Heading from "../../../../../components/backoffice/Heading/Heading";
+import PageHeader from "../../../../../components/backoffice/PageHeader/PageHeader";
+import TableActions from "../../../../../components/backoffice/TableActions/TableActions";
 import { Plus, Search, Trash2, Download } from "lucide-react";
 import Link from "next/link";
 import React from "react";
