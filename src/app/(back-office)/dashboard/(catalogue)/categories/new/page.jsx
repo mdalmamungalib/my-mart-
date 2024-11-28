@@ -1,9 +1,9 @@
 "use client";
-import FormHeader from "components/backoffice/FormHeader/FormHeader";
-import SubmitButton from "components/Forminput/SubmitButton";
-import TextareaInput from "components/Forminput/TextAreaInput";
-import TextInput from "components/Forminput/TextInput";
-import { generateSlug } from "lib/generateSlug";
+import FormHeader from "../../../../../../components/backoffice/FormHeader/FormHeader";
+import SubmitButton from "../../../../../../components/Forminput/SubmitButton";
+import TextareaInput from "../../../../../../components/Forminput/TextAreaInput";
+import TextInput from "../../../../../../components/Forminput/TextInput";
+import { generateSlug } from "../../../../../../lib/generateSlug";
 import React from "react";
 import { useForm } from "react-hook-form";
 
@@ -16,7 +16,7 @@ const NewCategory = () => {
   } = useForm();
 
   async function onSubmit(data) {
-    const slug = generateSlug(data?.name)
+    const slug = generateSlug(data?.name);
     data.slug = slug;
     console.log(data);
   }
@@ -41,7 +41,11 @@ const NewCategory = () => {
             errors={errors}
           />
         </div>
-        <SubmitButton isLoading={false} buttonTitle={"Save Category"} LoadingButtonTitle={"Creating Category Please Wait..."}/>
+        <SubmitButton
+          isLoading={false}
+          buttonTitle={"Save Category"}
+          LoadingButtonTitle={"Creating Category Please Wait..."}
+        />
       </form>
 
       {/* -id
