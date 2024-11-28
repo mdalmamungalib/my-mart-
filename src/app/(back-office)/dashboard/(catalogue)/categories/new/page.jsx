@@ -1,9 +1,9 @@
 "use client";
-import FormHeader from "../../../../../../components/backoffice/FormHeader/FormHeader";
-import SubmitButton from "../../../../../../components/Forminput/SubmitButton";
-import TextareaInput from "../../../../../../components/Forminput/TextAreaInput";
-import TextInput from "../../../../../../components/Forminput/TextInput";
-import { generateSlug } from "../../../../../../lib/generateSlug";
+import FormHeader from "components/backoffice/FormHeader/FormHeader";
+import SubmitButton from "components/Forminput/SubmitButton";
+import TextareaInput from "components/Forminput/TextAreaInput";
+import TextInput from "components/Forminput/TextInput";
+import { generateSlug } from "lib/generateSlug";
 import React from "react";
 import { useForm } from "react-hook-form";
 
