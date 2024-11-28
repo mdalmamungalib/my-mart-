@@ -16,7 +16,7 @@ const NewCategory = () => {
   } = useForm();
 
   async function onSubmit(data) {
-    const slug = generateSlug(data?.title)
+    const slug = generateSlug(data?.name)
     data.slug = slug;
     console.log(data);
   }
