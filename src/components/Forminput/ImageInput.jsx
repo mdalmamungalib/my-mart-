@@ -1,4 +1,3 @@
-"use client"
 import { UploadDropzone } from "../../lib/uploadthing";
 import { Pencil } from "lucide-react";
 import Image from "next/image";
@@ -38,11 +37,11 @@ export default function ImageInput({
           alt="Item image"
           width={1000}
           height={667}
-          className="object-cover w-full h-64"
+          className="object-cover w-full h-64 "
         />
       ) : (
         <UploadDropzone
-          endpoint={endpoint}
+          endpoint={"imageUploader"}
           onClientUploadComplete={(res) => {
             setImageUrl(res[0].url);
             // Do something with the response
