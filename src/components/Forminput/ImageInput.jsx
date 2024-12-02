@@ -6,14 +6,16 @@ import toast from "react-hot-toast";
 
 export default function ImageInput({
   label,
-  imageUrl = "",
+  imageUrl = "imageUploader",
   setImageUrl,
   className = "col-span-full",
   endpoint = "imageUploader",
-}) {
+}
+
+) {
   return (
     <div className={className}>
-      <div className="flex items-center justify-between mb-4">
+      <div className="flex items-center justify-between mb-4 ">
         <label
           htmlFor="course-image"
           className="block text-sm font-medium leading-6 text-gray-900 dark:text-slate-50"
@@ -37,11 +39,11 @@ export default function ImageInput({
           alt="Item image"
           width={1000}
           height={667}
-          className="object-cover w-full h-64 "
+          className="object-contain w-full h-64 "
         />
       ) : (
         <UploadDropzone
-          endpoint={"imageUploader"}
+          endpoint="categoryImageUploader"
           onClientUploadComplete={(res) => {
             setImageUrl(res[0].url);
             // Do something with the response
@@ -51,8 +53,8 @@ export default function ImageInput({
           }}
           onUploadError={(error) => {
             // Do something with the error.
-            toast.error("Upload completed with error: ", error.message)
-            console.log(`ERROR! ${error.message}`);
+            toast.error(`ERROR! ${error.message}`)
+            console.log(`ERROR! ${error.message}`, error);
           }}
         />
       )}

@@ -1,3 +1,9 @@
-import { generateReactHelpers } from "@uploadthing/react";
-
-export const { UploadButton, UploadDropzone, Uploader } = generateReactHelpers();
+import {
+    generateUploadButton,
+    generateUploadDropzone,
+  } from "@uploadthing/react";
+  
+  // Remove the type annotations
+  export const UploadButton = generateUploadButton();
+  export const UploadDropzone = generateUploadDropzone();
+  

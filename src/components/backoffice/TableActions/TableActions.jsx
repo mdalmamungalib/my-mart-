@@ -5,7 +5,7 @@ const TableActions = () => {
     return (
         <div className="flex items-center justify-between gap-8 px-12 py-6 rounded-lg dark:bg-slate-700 bg-slate-100">
         {/* export */}
-        <button className="text-white bg-slate-800 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex justify-center items-center gap-2 border border-lime-500">
+        <button className="dark:text-white text-slate-700 dark:bg-slate-900 bg-[#f9fafb] font-medium rounded-lg text-sm px-5 py-2.5 text-center flex justify-center items-center gap-2 border border-lime-500">
           <Download />
           <span>Export</span>
         </button>
