@@ -47,7 +47,7 @@ export default function ImageInput({
           onClientUploadComplete={(res) => {
             setImageUrl(res[0].url);
             // Do something with the response
-            toast.success("Upload completed")
+            toast.success("Image Upload completed")
             console.log("Files: ", res);
             console.log("Upload Completed");
           }}
