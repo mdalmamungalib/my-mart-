@@ -3,7 +3,6 @@ import { makePostRequest } from "../../../../../../lib/apiRequest.js";
 import FormHeader from "../../../../../../components/backoffice/FormHeader/FormHeader.jsx";
 import ImageInput from "../../../../../../components/Forminput/ImageInput.jsx";
 import SubmitButton from "../../../../../../components/Forminput/SubmitButton.jsx";
-import TextareaInput from "../../../../../../components/Forminput/TextAreaInput.jsx";
 import TextInput from "../../../../../../components/Forminput/TextInput.jsx";
 import { generateSlug } from "../../../../../../lib/generateSlug.js";
 import React, { useState } from "react";
