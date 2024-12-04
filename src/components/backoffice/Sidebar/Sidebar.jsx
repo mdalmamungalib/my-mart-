@@ -84,6 +84,10 @@ const Sidebar = ({ showSidebar }) => {
       title: "Coupons",
       link: "/dashboard/coupons",
     },
+    {
+      title: "Store Sliders",
+      link: "/dashboard/storeSliders",
+    },
   ];
 
   const [openMenu, setOpenMenu] = useState(false);

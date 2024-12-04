@@ -7,32 +7,39 @@ import TextInput from "../../../../../../components/Forminput/TextInput.jsx";
 import { generateSlug } from "../../../../../../lib/generateSlug.js";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import generateCouponCode from "../../../../../../lib/generateCouponCode.js";
 
 const NewCoupons = () => {
-  
   const [loading, setLoading] = useState(false);
+  const [couponCode, setCouponCode] = useState();
+
   const {
     register,
     reset,
+    watch,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
   async function onSubmit(data) {
     // setLoading(true);
-    // const slug = generateSlug(data?.name);
+
     // data.slug = slug;
     // data.imageUrl = imageUrl;
+    const couponCode = generateCouponCode(
+      data.campaignName,
+      data.couponValidityTime
+    );
+    data.couponCode = couponCode;
     console.log(data);
 
-    // makePostRequest(
-    //   setLoading,
-    //   "api/categories",
-    //   data,
-    //   "Category",
-    //   reset
-    // );
-   
+    makePostRequest(
+      setLoading,
+      "api/coupons",
+      data,
+      "Coupon",
+      reset
+    );
   }
   return (
     <div>
@@ -48,12 +55,7 @@ const NewCoupons = () => {
             register={register}
             errors={errors}
           />
-          <TextInput
-            label="Campaign Code"
-            name="campaignCode"
-            register={register}
-            errors={errors}
-          />
+          
           <TextInput
             label="Coupon validity time"
             name="couponValidityTime"
@@ -61,8 +63,6 @@ const NewCoupons = () => {
             register={register}
             errors={errors}
           />
-         
-          
         </div>
         <SubmitButton
           isLoading={loading}
