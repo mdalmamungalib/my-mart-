@@ -8,30 +8,10 @@ import TextInput from "../../../../../../components/Forminput/TextInput.jsx";
 import { generateSlug } from "../../../../../../lib/generateSlug.js";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import SelectInput from "components/Forminput/SelectInput.jsx";
 
-const NewCategory = () => {
+const NewBanner = () => {
   const [imageUrl, setImageUrl] = useState("");
-  const markets = [
-    {
-      id: 1,
-      title: "Phone Sellers Market"
-    },
-    {
-      id: 2,
-      title: "Cloth Sellers Market"
-    },
-    {
-      id: 3,
-      title: "Laptop Sellers Market"
-    },
-    {
-      id: 4,
-      title: "Farmers Sellers Market"
-    },
-  ];
   const [loading, setLoading] = useState(false);
-  
   const {
     register,
     reset,
@@ -41,45 +21,34 @@ const NewCategory = () => {
 
   async function onSubmit(data) {
     setLoading(true);
-    const slug = generateSlug(data?.name);
-    data.slug = slug;
     data.imageUrl = imageUrl;
     console.log(data);
 
     makePostRequest(
       setLoading,
-      "api/categories",
+      "api/banners",
       data,
-      "Category",
+      "Banner",
       reset
     );
     setImageUrl("");
   }
   return (
     <div>
-      <FormHeader title={"New Category"} />
+      <FormHeader title={"New Banner"} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-5xl p-4 mx-auto mt-12 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
       >
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput
-            label="Name"
-            name="name"
+            label="Banner URL"
+            name="bannerUrl"
             register={register}
             errors={errors}
           />
-          <SelectInput
-           label="Select Markets"
-           name="marketsIds"
-           register={register}
-           errors={errors}
-           className="w-full"
-           options={markets}
-           multiple={false}
-          />
           <TextareaInput
-            label="Category Description"
+            label="Banner Description"
             name="description"
             register={register}
             errors={errors}
@@ -87,23 +56,23 @@ const NewCategory = () => {
           <ImageInput
             imageUrl={imageUrl}
             setImageUrl={setImageUrl}
-            endpoint="categoryImageUploader"
-            label={"Category Image"}
+            endpoint="bannerImageUploader"
+            label={"Banner Image"}
           />
         </div>
         <SubmitButton
           isLoading={loading}
-          buttonTitle={"Save Category"}
-          LoadingButtonTitle={"Creating Category Please Wait..."}
+          buttonTitle={"Save Banner"}
+          LoadingButtonTitle={"Creating Banner Please Wait..."}
         />
       </form>
 
       {/* -id
-           -title
-           -slug
-           -description-image */}
+           -image
+           -description 
+           -url */}
     </div>
   );
 };
 
-export default NewCategory;
+export default NewBanner;

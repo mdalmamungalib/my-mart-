@@ -77,16 +77,12 @@ const Sidebar = ({ showSidebar }) => {
       link: "/dashboard/categories",
     },
     {
-      title: "Attributes",
-      link: "/dashboard/attributes",
-    },
-    {
       title: "Coupons",
       link: "/dashboard/coupons",
     },
     {
       title: "Store Sliders",
-      link: "/dashboard/storeSliders",
+      link: "/dashboard/banners",
     },
   ];
 
