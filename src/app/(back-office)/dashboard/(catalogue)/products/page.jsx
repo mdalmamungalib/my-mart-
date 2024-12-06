@@ -1,13 +1,22 @@
-import React from 'react';
+import PageHeader from "../../../../../components/backoffice/PageHeader/PageHeader";
+import TableActions from "../../../../../components/backoffice/TableActions/TableActions";
+import React from "react";
 
 const page = () => {
-    return (
-        <div className="flex flex-col items-center justify-center min-h-screen">
-      <h1 className="text-2xl font-semibold text-slate-800">
-        Welcome to Product page
-      </h1>
+  return (
+    <div>
+      {/* Header */}
+      <PageHeader
+        heading={"Products"}
+        href={"/dashboard/products/new"}
+        LinkTitle={"Add Product"}
+      />
+      {/* Table */}
+      {/* Export || Bulk Delete || Search */}
+      <TableActions/>
+      <h1>Welcome to Products page</h1>
     </div>
-    );
+  );
 };
 
 export default page;
