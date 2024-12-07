@@ -9,9 +9,12 @@ import { generateSlug } from "../../../../../../lib/generateSlug.js";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import SelectInput from "components/Forminput/SelectInput.jsx";
+import { Plus, X } from "lucide-react";
 
 const NewProduct = () => {
   const [imageUrl, setImageUrl] = useState("");
+  const [tags, setTags] = useState(["tag1", "tag2"]);
+  const [showTagForm, setShowTagForm] = useState(false);
   const categories = [
     {
       id: 1,
@@ -58,16 +61,16 @@ const NewProduct = () => {
 
     makePostRequest(
       setLoading,
-      "api/categories",
+      "api/products",
       data,
-      "Category",
+      "Product",
       reset
     );
     setImageUrl("");
   }
   return (
     <div>
-      <FormHeader title={"New Category"} />
+      <FormHeader title={"New Product"} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-5xl p-4 mx-auto mt-12 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
@@ -84,12 +87,14 @@ const NewProduct = () => {
             name="sku"
             register={register}
             errors={errors}
+            className="w-full"
           />
           <TextInput
             label="Product Barcode"
             name="barcode"
             register={register}
             errors={errors}
+            className="w-full"
           />
           <TextInput
             label="Product Price (Before Discount)"
@@ -97,6 +102,7 @@ const NewProduct = () => {
             name="productPrice"
             register={register}
             errors={errors}
+            className="w-full"
           />
           <TextInput
             label="Product Price (Discounted)"
@@ -104,6 +110,7 @@ const NewProduct = () => {
             name="salePrice"
             register={register}
             errors={errors}
+            className="w-full"
           />
           <SelectInput
             label="Select Category"
@@ -128,6 +135,38 @@ const NewProduct = () => {
             endpoint="productImageUploader"
             label={"Product Image"}
           />
+
+          <div className="sm:col-span-2">
+            {showTagForm ? (
+              <div className="flex items-center w-full">
+                <div className="flex w-full ">
+                  <input
+                    type="text"
+                    id="voice-search"
+                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    placeholder="Create Tags..."
+                    required
+                  />
+                  <button className=" flex items-center space-x-2 py-2.5 px-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                    <Plus className="w-4 h-4 "/>
+                    <span>Add</span>
+                  </button>
+                  <button onClick={() => setShowTagForm(false)} className="p-4 ml-2 bg-red-600 rounded-full">
+                    <X className="w-4 h-4 "/>
+                  </button>
+                </div>
+              </div>
+            ) : (
+              <button
+                onClick={() => setShowTagForm(true)}
+                type="button"
+                className="flex items-center px-4 py-2 space-x-2 "
+              >
+                <Plus />
+                <span>Add Tags</span>
+              </button>
+            )}
+          </div>
           <TextareaInput
             label="Product Description"
             name="description"
@@ -135,10 +174,11 @@ const NewProduct = () => {
             errors={errors}
           />
         </div>
+
         <SubmitButton
           isLoading={loading}
-          buttonTitle={"Save Category"}
-          LoadingButtonTitle={"Creating Category Please Wait..."}
+          buttonTitle={"Save Product"}
+          LoadingButtonTitle={"Creating Product Please Wait..."}
         />
       </form>
 

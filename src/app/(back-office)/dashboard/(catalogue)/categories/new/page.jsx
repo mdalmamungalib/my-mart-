@@ -68,6 +68,7 @@ const NewCategory = () => {
             name="name"
             register={register}
             errors={errors}
+            
           />
           <SelectInput
            label="Select Markets"
