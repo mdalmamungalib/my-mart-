@@ -10,25 +10,14 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import SelectInput from "components/Forminput/SelectInput.jsx";
 import { Plus, X } from "lucide-react";
+import ArrayItemsInput from "components/Forminput/ArrayItemsInput.jsx";
 
 const NewProduct = () => {
   const [imageUrl, setImageUrl] = useState("");
-  
+
   // tags
-  const [tags, setTags] = useState([
-    "tag 1",
-    "tag 2",
-    "tag 3",
-    "tag 4",
-    "tag 5",
-  ]);
-  const [tag, setTag] = useState("");
-  const [showTagForm, setShowTagForm] = useState(false);
-  function addTag(tag){
-    setTags([...tags, tag]);
-    setTag("");
-  }
-  
+  const [tags, setTags] = useState([]);
+
   // tags end
   const categories = [
     {
@@ -44,8 +33,7 @@ const NewProduct = () => {
       title: "Category 3",
     },
   ];
-  
-  
+
   const sellers = [
     {
       id: 1,
@@ -60,7 +48,7 @@ const NewProduct = () => {
       title: "Sellers 3",
     },
   ];
-  
+
   // loading
   const [loading, setLoading] = useState(false);
 
@@ -74,6 +62,7 @@ const NewProduct = () => {
   async function onSubmit(data) {
     setLoading(true);
     const slug = generateSlug(data?.title);
+    data.tags = tags;
     data.slug = slug;
     data.imageUrl = imageUrl;
     console.log(data);
@@ -155,58 +144,7 @@ const NewProduct = () => {
             label={"Product Image"}
           />
 
-          <div className="sm:col-span-2">
-            {showTagForm ? (
-              <div className="flex items-center w-full">
-                <div className="flex w-full ">
-                  <input
-                  value={tag}
-                  onChange={e = setTag(e.target.value)}
-                    type="text"
-                    id="voice-search"
-                    className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                    placeholder="Create Tags..."
-                    required
-                  />
-                  <button
-                  onClick={addTag}
-                  type="button"
-                  className=" flex items-center space-x-2 py-2.5 px-3 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                    <Plus className="w-4 h-4 " />
-                    <span>Add</span>
-                  </button>
-                  <button
-                    onClick={() => setShowTagForm(false)}
-                    className="p-4 ml-2 bg-red-600 rounded-full"
-                  >
-                    <X className="w-4 h-4 " />
-                  </button>
-                </div>
-              </div>
-            ) : (
-              <button
-                onClick={() => setShowTagForm(true)}
-                type="button"
-                className="flex items-center px-4 py-2 space-x-2 "
-              >
-                <Plus />
-                <span>Add Tags</span>
-              </button>
-            )}
-            <div className="flex flex-wrap gap-3 mt-4">
-              {tags.map((item, i) => {
-                return (
-                  <div
-                    key={i}
-                    className="flex items-center px-4 py-2 space-x-2 rounded-md dark:bg-slate-600 bg-slate-300"
-                  >
-                    {item}
-                    <X className="w-4 h-4 cursor-pointer hover:text-red-500" />
-                  </div>
-                );
-              })}
-            </div>
-          </div>
+          <ArrayItemsInput items={tags} setItems={setTags} itemTitle="Tag"/>
           <TextareaInput
             label="Product Description"
             name="description"
