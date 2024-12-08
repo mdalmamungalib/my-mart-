@@ -9,14 +9,13 @@ import {
   Users2,
   Store,
   Gem,
-  Compass,
-  User,
   Settings,
   Radar,
   LogOut,
   ChevronRight,
   Minus,
   ChevronDown,
+  Truck,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -47,7 +46,7 @@ const Sidebar = ({ showSidebar }) => {
     {
       title: "Orders",
       link: "/dashboard/orders",
-      icons: Compass,
+      icons: Truck,
     },
     {
       title: "Our Staff",

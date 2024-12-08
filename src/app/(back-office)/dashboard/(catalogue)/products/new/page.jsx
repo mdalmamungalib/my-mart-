@@ -11,6 +11,7 @@ import { useForm } from "react-hook-form";
 import SelectInput from "components/Forminput/SelectInput.jsx";
 import { Plus, X } from "lucide-react";
 import ArrayItemsInput from "components/Forminput/ArrayItemsInput.jsx";
+import ToggleInput from "components/Forminput/ToggleInput.jsx";
 
 const NewProduct = () => {
   const [imageUrl, setImageUrl] = useState("");
@@ -55,9 +56,14 @@ const NewProduct = () => {
   const {
     register,
     reset,
+    watch,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: { isActive: true },
+  });
+
+  const isActive = watch("isActive");
 
   async function onSubmit(data) {
     setLoading(true);
@@ -144,12 +150,25 @@ const NewProduct = () => {
             label={"Product Image"}
           />
 
-          <ArrayItemsInput items={tags} setItems={setTags} itemTitle="Tag"/>
+          <ArrayItemsInput
+            items={tags}
+            setItems={setTags}
+            itemTitle="Tag"
+          />
           <TextareaInput
             label="Product Description"
             name="description"
             register={register}
             errors={errors}
+          />
+
+          {/* toggle input */}
+          <ToggleInput
+            name={"isActive"}
+            register={register}
+            label={"Publish Your Product"}
+            falseTitle={"Draft"}
+            trueTitle={"Active"}
           />
         </div>
 

@@ -6,6 +6,7 @@ const ArrayItemsInput = ({ setItems, items, itemTitle }) => {
   const [item, setItem] = useState("");
   const [showTagForm, setShowTagForm] = useState(false);
   function addItem() {
+    if(!item) return;
     setItems([...items, item]);
     setItem("");
   }
@@ -25,7 +26,8 @@ const ArrayItemsInput = ({ setItems, items, itemTitle }) => {
               onChange={(e) => setItem(e.target.value)}
               type="text"
               id="voice-search"
-              className=" border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-lime-500 focus:border-lime-500 block w-full ps-10 p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-lime-500 dark:focus:border-lime-500"
+              className=" border border-gray-300 text-gray-900 text-sm rounded-lg  
+              focus:ring-lime-500 focus:border-lime-500 block w-full ps-10 p-2.5  dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-lime-500 dark:focus:border-lime-500"
               placeholder={`Create a ${itemTitle}...`}
             />
             <button
