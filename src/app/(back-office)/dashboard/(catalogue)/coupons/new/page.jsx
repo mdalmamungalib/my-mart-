@@ -8,6 +8,7 @@ import { generateSlug } from "../../../../../../lib/generateSlug.js";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import generateCouponCode from "../../../../../../lib/generateCouponCode.js";
+import ToggleInput from "components/Forminput/ToggleInput.jsx";
 
 const NewCoupons = () => {
   const [loading, setLoading] = useState(false);
@@ -19,8 +20,10 @@ const NewCoupons = () => {
     watch,
     handleSubmit,
     formState: { errors },
-  } = useForm();
-
+  } = useForm({
+    defaultValues: { isActive: true },
+  });
+  const isActive = watch("isActive");
   async function onSubmit(data) {
     // setLoading(true);
 
@@ -55,13 +58,21 @@ const NewCoupons = () => {
             register={register}
             errors={errors}
           />
-          
+
           <TextInput
             label="Coupon validity time"
             name="couponValidityTime"
             type="date"
             register={register}
             errors={errors}
+          />
+          {/* toggle input */}
+          <ToggleInput
+            name={"isActive"}
+            register={register}
+            label={"Publish Your Cupon "}
+            falseTitle={"Draft"}
+            trueTitle={"Active"}
           />
         </div>
         <SubmitButton

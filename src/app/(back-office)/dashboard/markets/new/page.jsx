@@ -1,18 +1,19 @@
 "use client";
-import { makePostRequest } from "../../../../../../lib/apiRequest.js";
-import FormHeader from "../../../../../../components/backoffice/FormHeader/FormHeader.jsx";
-import ImageInput from "../../../../../../components/Forminput/ImageInput.jsx";
-import SubmitButton from "../../../../../../components/Forminput/SubmitButton.jsx";
-import TextareaInput from "../../../../../../components/Forminput/TextareaInput.jsx";
-import TextInput from "../../../../../../components/Forminput/TextInput.jsx";
-import { generateSlug } from "../../../../../../lib/generateSlug.js";
+import { makePostRequest } from "../../../../../lib/apiRequest.js";
+import FormHeader from "components/backoffice/FormHeader/FormHeader.jsx";
+import ImageInput from "components/Forminput/ImageInput.jsx";
+import SubmitButton from "components/Forminput/SubmitButton.jsx";
+import TextInput from "components/Forminput/TextInput.jsx";
+import { generateSlug } from "../../../../../lib/generateSlug.js";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import ToggleInput from "components/Forminput/ToggleInput.jsx";
+import TextareaInput from "components/Forminput/TextareaInput.jsx";
 
-const NewBanner = () => {
-  const [imageUrl, setImageUrl] = useState("");
+const NewMarkets = () => {
   const [loading, setLoading] = useState(false);
+  const [logoUrl, setLogoUrl] = useState("");
+
   const {
     register,
     reset,
@@ -22,71 +23,71 @@ const NewBanner = () => {
   } = useForm({
     defaultValues: { isActive: true },
   });
-
   const isActive = watch("isActive");
   async function onSubmit(data) {
-    setLoading(true);
-    data.imageUrl = imageUrl;
+    
+    const slug = generateSlug(data.title);
+    data.slug = slug;
+    data.logoUrl = logoUrl;
     console.log(data);
-
+    
     makePostRequest(
       setLoading,
-      "api/banners",
+      "api/markets",
       data,
-      "Banner",
+      "Markets",
       reset
     );
-    setImageUrl("");
   }
   return (
     <div>
-      <FormHeader title={"New Banner"} />
+      <FormHeader title={"New Market"} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-5xl p-4 mx-auto mt-12 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
       >
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput
-            label="Banner URL"
-            name="bannerUrl"
-            register={register}
-            errors={errors}
-          />
-          <TextareaInput
-            label="Banner Description"
-            name="description"
+            label="Market Title"
+            name="title"
             register={register}
             errors={errors}
           />
           <ImageInput
-            imageUrl={imageUrl}
-            setImageUrl={setImageUrl}
-            endpoint="bannerImageUploader"
-            label={"Banner Image"}
+            imageUrl={logoUrl}
+            setImageUrl={setLogoUrl}
+            endpoint="marketLogoUpload"
+            label={"Market Logo"}
           />
-
+          <TextareaInput
+            label="Market Description"
+            name="description"
+            register={register}
+            errors={errors}
+          />
           {/* toggle input */}
           <ToggleInput
             name={"isActive"}
             register={register}
-            label={"Publish Your Banner"}
+            label={"Market Status"}
             falseTitle={"Draft"}
             trueTitle={"Active"}
           />
         </div>
         <SubmitButton
           isLoading={loading}
-          buttonTitle={"Save Banner"}
-          LoadingButtonTitle={"Creating Banner Please Wait..."}
+          buttonTitle={"Save Market"}
+          LoadingButtonTitle={"Creating Market Please Wait..."}
         />
       </form>
 
       {/* -id
-           -image
-           -description 
-           -url */}
+      -Campaign Image
+           -Campaign Name
+           -Campaign Code
+           -Coupon validity time */}
     </div>
   );
 };
 
-export default NewBanner;
+export default NewMarkets;

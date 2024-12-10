@@ -80,7 +80,7 @@ const Sidebar = ({ showSidebar }) => {
       link: "/dashboard/coupons",
     },
     {
-      title: "Store Sliders",
+      title: "Store Banners",
       link: "/dashboard/banners",
     },
   ];
