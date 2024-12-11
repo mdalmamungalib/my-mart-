@@ -16,6 +16,7 @@ import {
   Minus,
   ChevronDown,
   Truck,
+  Building2,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -50,8 +51,13 @@ const Sidebar = ({ showSidebar }) => {
     },
     {
       title: "Our Staff",
-      link: "/dashboard/ourstaff",
+      link: "/dashboard/staff",
       icons: Users2,
+    },
+    {
+      title: "Mart Community",
+      link: "/dashboard/community",
+      icons: Building2,
     },
     {
       title: "Settings",

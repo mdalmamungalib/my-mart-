@@ -1,5 +1,5 @@
-import PageHeader from "../../../../../components/backoffice/PageHeader/PageHeader";
-import TableActions from "../../../../../components/backoffice/TableActions/TableActions";
+import PageHeader from "../../../../components/backoffice/PageHeader/PageHeader";
+import TableActions from "../../../../components/backoffice/TableActions/TableActions";
 import React from "react";
 
 const page = () => {

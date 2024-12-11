@@ -40,7 +40,7 @@ const NewSeller = () => {
       "Sellers",
       reset
     );
-    console.log(data);
+    
   }
   return (
     <div>
@@ -119,7 +119,7 @@ const NewSeller = () => {
 
         <SubmitButton
           isLoading={loading}
-          buttonTitle={"Save Seller"}
+          buttonTitle={"Create Seller"}
           LoadingButtonTitle={"Creating Seller Please Wait..."}
         />
       </form>
