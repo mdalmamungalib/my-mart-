@@ -1,7 +1,7 @@
 import React from "react";
 
-const UpdateCategory = () => {
+const UpdateCommunity = () => {
   return <div></div>;
 };
 
-export default UpdateCategory;
+export default UpdateCommunity;

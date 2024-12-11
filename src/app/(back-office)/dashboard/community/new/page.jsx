@@ -1,17 +1,18 @@
 "use client";
-import { makePostRequest } from "../../../../../../lib/apiRequest.js";
-import FormHeader from "../../../../../../components/backoffice/FormHeader/FormHeader.jsx";
-import ImageInput from "../../../../../../components/Forminput/ImageInput.jsx";
-import SubmitButton from "../../../../../../components/Forminput/SubmitButton.jsx";
-import TextareaInput from "../../../../../../components/Forminput/TextareaInput.jsx";
-import TextInput from "../../../../../../components/Forminput/TextInput.jsx";
-import { generateSlug } from "../../../../../../lib/generateSlug.js";
+import { makePostRequest } from "../../../../../lib/apiRequest.js";
+import { generateSlug } from "../../../../../lib/generateSlug.js";
+import FormHeader from "components/backoffice/FormHeader/FormHeader.jsx";
+import ImageInput from "components/Forminput/ImageInput.jsx";
+import SubmitButton from "components/Forminput/SubmitButton.jsx";
+import TextareaInput from "components/Forminput/TextareaInput.jsx";
+import TextInput from "components/Forminput/TextInput.jsx";
+
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import SelectInput from "components/Forminput/SelectInput.jsx";
 import ToggleInput from "components/Forminput/ToggleInput.jsx";
 
-const NewCategory = () => {
+const Community = () => {
   const [imageUrl, setImageUrl] = useState("");
   const markets = [
     {
@@ -119,4 +120,4 @@ const NewCategory = () => {
   );
 };
 
-export default NewCategory;
+export default Community;
