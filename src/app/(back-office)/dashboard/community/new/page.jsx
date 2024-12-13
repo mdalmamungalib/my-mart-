@@ -7,29 +7,27 @@ import SubmitButton from "components/Forminput/SubmitButton.jsx";
 import TextareaInput from "components/Forminput/TextareaInput.jsx";
 import TextInput from "components/Forminput/TextInput.jsx";
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import SelectInput from "components/Forminput/SelectInput.jsx";
 import ToggleInput from "components/Forminput/ToggleInput.jsx";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
 
-const Community = () => {
+const Training = () => {
   const [imageUrl, setImageUrl] = useState("");
-  const markets = [
+  const categories = [
     {
       id: 1,
-      title: "Phone Sellers Market",
+      title: "Category 1",
     },
     {
       id: 2,
-      title: "Cloth Sellers Market",
+      title: "Category 2",
     },
     {
       id: 3,
-      title: "Laptop Sellers Market",
-    },
-    {
-      id: 4,
-      title: "Farmers Sellers Market",
+      title: "Category 3",
     },
   ];
   const [loading, setLoading] = useState(false);
@@ -43,6 +41,36 @@ const Community = () => {
   } = useForm({
     defaultValues: { isActive: true },
   });
+
+  // Quill Editor
+  const [content, setContent] = useState("");
+//Custom Tool Bar
+  // const modules = {
+  //   toolbar: [
+  //     [{ header: [1, 2, false] }],
+  //     ["bold", "italic", "underline", "strike", "blockquote"],
+  //     [{ list: "ordered" }, { list: "bullet" }],
+  //     ["link", "color", "image"],
+  //     [{ "code-block": true }],
+  //     ["clean"],
+  //   ],
+  // };
+  // const formats = [
+  //   "header",
+  //   "bold",
+  //   "italic",
+  //   "underline",
+  //   "strike",
+  //   "blockquote",
+  //   "list",
+  //   "bullet",
+  //   "link",
+  //   "indent",
+  //   "image",
+  //   "code-block",
+  //   "color",
+  // ];
+  // Quill Editor End
 
   const isActive = watch("isActive");
   async function onSubmit(data) {
@@ -63,29 +91,29 @@ const Community = () => {
   }
   return (
     <div>
-      <FormHeader title={"New Category"} />
+      <FormHeader title={"New Training"} />
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="w-full max-w-5xl p-4 mx-auto mt-12 bg-white border border-gray-200 rounded-lg shadow sm:p-6 md:p-8 dark:bg-gray-800 dark:border-gray-700"
       >
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput
-            label="Name"
-            name="name"
-            register={register}
-            errors={errors}
-          />
-          <SelectInput
-            label="Select Markets"
-            name="marketsIds"
+            label="Training Title"
+            name="title"
             register={register}
             errors={errors}
             className="w-full"
-            options={markets}
-            multiple={false}
+          />
+          <SelectInput
+            label="Select Category"
+            name="categoryId"
+            register={register}
+            errors={errors}
+            className="w-full"
+            options={categories}
           />
           <TextareaInput
-            label="Category Description"
+            label="Training Description"
             name="description"
             register={register}
             errors={errors}
@@ -93,31 +121,54 @@ const Community = () => {
           <ImageInput
             imageUrl={imageUrl}
             setImageUrl={setImageUrl}
-            endpoint="categoryImageUploader"
-            label={"Category Image"}
+            endpoint="trainingImageUploader"
+            label={"Training Thumbnail"}
           />
+
+          {/* content */}
+          {/* <div className="sm:col-span-2">
+                <label
+                  htmlFor="content"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Blog Content
+                </label>
+                <ReactQuill
+                  theme="snow"
+                  value={content}
+                  onChange={setContent}
+                  modules={modules}
+                  formats={formats}
+                />
+              </div> */}
+          {/* content End */}
+
           {/* toggle input */}
           <ToggleInput
             name={"isActive"}
             register={register}
-            label={"Publish Your Category"}
+            label={"Publish Your Training"}
             falseTitle={"Draft"}
             trueTitle={"Active"}
           />
         </div>
         <SubmitButton
           isLoading={loading}
-          buttonTitle={"Save Category"}
-          LoadingButtonTitle={"Creating Category Please Wait..."}
+          buttonTitle={"Create Training"}
+          LoadingButtonTitle={"Creating Training Please Wait..."}
         />
       </form>
 
       {/* -id
            -title
+           -ExpertID
+           -category
            -slug
-           -description-image */}
+           -description
+           -content => rich text
+           -image */}
     </div>
   );
 };
 
-export default Community;
+export default Training;

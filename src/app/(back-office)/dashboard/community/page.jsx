@@ -7,9 +7,9 @@ const page = () => {
     <div>
       {/* Header */}
       <PageHeader
-        heading={"Categories"}
-        href={"/dashboard/categories/new"}
-        LinkTitle={"Add Category"}
+        heading={"My Mart Community Training"}
+        href={"/dashboard/community/new"}
+        LinkTitle={"Add Training"}
       />
       {/* Table */}
       {/* Export || Bulk Delete || Search */}
