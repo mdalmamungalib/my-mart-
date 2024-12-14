@@ -6,31 +6,26 @@ import ImageInput from "components/Forminput/ImageInput.jsx";
 import SubmitButton from "components/Forminput/SubmitButton.jsx";
 import TextareaInput from "components/Forminput/TextareaInput.jsx";
 import TextInput from "components/Forminput/TextInput.jsx";
-
-import React, { useState, useMemo } from "react";
-import { useForm } from "react-hook-form";
 import SelectInput from "components/Forminput/SelectInput.jsx";
 import ToggleInput from "components/Forminput/ToggleInput.jsx";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
+import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import QuillEditor from "components/Forminput/quillEditor.jsx";
+
+// Dynamically import ReactQuill
+
+
 
 const Training = () => {
   const [imageUrl, setImageUrl] = useState("");
-  const categories = [
-    {
-      id: 1,
-      title: "Category 1",
-    },
-    {
-      id: 2,
-      title: "Category 2",
-    },
-    {
-      id: 3,
-      title: "Category 3",
-    },
-  ];
+  const [content, setContent] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const categories = [
+    { id: 1, title: "Category 1" },
+    { id: 2, title: "Category 2" },
+    { id: 3, title: "Category 3" },
+  ];
 
   const {
     register,
@@ -42,53 +37,23 @@ const Training = () => {
     defaultValues: { isActive: true },
   });
 
-  // Quill Editor
-  const [content, setContent] = useState("");
-//Custom Tool Bar
-  // const modules = {
-  //   toolbar: [
-  //     [{ header: [1, 2, false] }],
-  //     ["bold", "italic", "underline", "strike", "blockquote"],
-  //     [{ list: "ordered" }, { list: "bullet" }],
-  //     ["link", "color", "image"],
-  //     [{ "code-block": true }],
-  //     ["clean"],
-  //   ],
-  // };
-  // const formats = [
-  //   "header",
-  //   "bold",
-  //   "italic",
-  //   "underline",
-  //   "strike",
-  //   "blockquote",
-  //   "list",
-  //   "bullet",
-  //   "link",
-  //   "indent",
-  //   "image",
-  //   "code-block",
-  //   "color",
-  // ];
-  // Quill Editor End
+  
+
 
   const isActive = watch("isActive");
-  async function onSubmit(data) {
+
+  const onSubmit = async (data) => {
     setLoading(true);
-    const slug = generateSlug(data?.name);
+    const slug = generateSlug(data.name);
     data.slug = slug;
     data.imageUrl = imageUrl;
+    data.content = content;
     console.log(data);
 
-    makePostRequest(
-      setLoading,
-      "api/categories",
-      data,
-      "Category",
-      reset
-    );
+    makePostRequest(setLoading, "api/categories", data, "Category", reset);
     setImageUrl("");
-  }
+  };
+
   return (
     <div>
       <FormHeader title={"New Training"} />
@@ -124,26 +89,10 @@ const Training = () => {
             endpoint="trainingImageUploader"
             label={"Training Thumbnail"}
           />
-
-          {/* content */}
-          {/* <div className="sm:col-span-2">
-                <label
-                  htmlFor="content"
-                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
-                >
-                  Blog Content
-                </label>
-                <ReactQuill
-                  theme="snow"
-                  value={content}
-                  onChange={setContent}
-                  modules={modules}
-                  formats={formats}
-                />
-              </div> */}
-          {/* content End */}
-
-          {/* toggle input */}
+           <QuillEditor label={"Training Content"}
+           value={content}
+           onChange={setContent}
+           />
           <ToggleInput
             name={"isActive"}
             register={register}
@@ -158,15 +107,6 @@ const Training = () => {
           LoadingButtonTitle={"Creating Training Please Wait..."}
         />
       </form>
-
-      {/* -id
-           -title
-           -ExpertID
-           -category
-           -slug
-           -description
-           -content => rich text
-           -image */}
     </div>
   );
 };
