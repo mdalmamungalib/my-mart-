@@ -1,14 +1,13 @@
-const generateUserCode = (prefix, userName) => {
-    if(!prefix || !userName){
-        throw new Error("Both perfix and useName are required to generate a code.")
-    }
+// src/utils/generateUserCode.js
 
-    const formattedName = userName.trim()
-    .toUpperCase()
-    .replace(/\s+/g, "");
-    const userCode = `${prefix}-${formattedName}`;
-    
-    return userCode;
-}
-
-export default generateUserCode;
+const generateUserCode = (username, prefix = "USR") => {
+    const userAbbreviation = username
+      .toUpperCase()
+      .replace(/\s+/g, "")
+      .slice(0, 2);
+    const randomString = Math.random().toString(36).substring(2, 8).toUpperCase();
+    return `${prefix}-${userAbbreviation}-${randomString}`;
+  };
+  
+  export default generateUserCode;
+  

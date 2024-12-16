@@ -1,16 +1,13 @@
 "use client";
-import { makePostRequest } from "../../../../../lib/apiRequest.js";
 import FormHeader from "components/backoffice/FormHeader/FormHeader.jsx";
-
 import SubmitButton from "components/Forminput/SubmitButton.jsx";
 import TextareaInput from "components/Forminput/TextareaInput.jsx";
 import TextInput from "components/Forminput/TextInput.jsx";
 import ToggleInput from "components/Forminput/ToggleInput.jsx";
-
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-
-import generateCouponCode from "lib/generateCouponCode.js";
+import { makePostRequest } from "../../../../../lib/apiRequest.js";
+import generateUserCode from "../../../../../lib/generateUserCode.js";
 
 const NewSeller = () => {
   // loading
@@ -30,7 +27,7 @@ const NewSeller = () => {
 
   async function onSubmit(data) {
     setLoading(true);
-    const code = generateCouponCode(data.name, data.date);
+    const code = generateUserCode(data.name);
     data.code = code;
     console.log(data);
     makePostRequest(

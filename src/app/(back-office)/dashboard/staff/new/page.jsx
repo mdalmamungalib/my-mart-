@@ -1,14 +1,14 @@
 "use client";
-import { makePostRequest } from "../../../../../lib/apiRequest.js";
+
 import FormHeader from "components/backoffice/FormHeader/FormHeader.jsx";
 import SubmitButton from "components/Forminput/SubmitButton.jsx";
 import TextareaInput from "components/Forminput/TextareaInput.jsx";
 import TextInput from "components/Forminput/TextInput.jsx";
-import { generateSlug } from "../../../../../lib/generateSlug.js";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import ToggleInput from "components/Forminput/ToggleInput.jsx";
-import generateCouponCode from "lib/generateCouponCode.js";
+import { makePostRequest } from "../../../../../lib/apiRequest.js";
+import generateUserCode from "../../../../../lib/generateUserCode.js";
 
 const NewStaff = () => {
   const [loading, setLoading] = useState(false);
@@ -38,10 +38,7 @@ const NewStaff = () => {
            */
 
     setLoading(true);
-    const code = generateCouponCode(
-      data.name,
-      data.nin
-    );
+    const code = generateUserCode(data.name);
     data.code = code;
     console.log(data);
 
@@ -92,7 +89,6 @@ const NewStaff = () => {
           <TextInput
             label="NIN (Id Number)"
             name="nin"
-            type="date"
             register={register}
             errors={errors}
             className="w-full"

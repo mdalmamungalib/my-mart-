@@ -12,9 +12,15 @@ import SelectInput from "components/Forminput/SelectInput.jsx";
 import { Plus, X } from "lucide-react";
 import ArrayItemsInput from "components/Forminput/ArrayItemsInput.jsx";
 import ToggleInput from "components/Forminput/ToggleInput.jsx";
+import MultipleToggleInput from "components/Forminput/MultipleToggleInput.jsx";
 
 const NewProduct = () => {
   const [imageUrl, setImageUrl] = useState("");
+  const [multiple, stMultiple] = useState(false);
+
+  const handleToggleChange = (state) => {
+    stMultiple(state);
+  };
 
   // tags
   const [tags, setTags] = useState([]);
@@ -126,6 +132,8 @@ const NewProduct = () => {
             errors={errors}
             className="w-full"
           />
+          <div>
+          
           <SelectInput
             label="Select Category"
             name="categoryIds"
@@ -133,7 +141,18 @@ const NewProduct = () => {
             errors={errors}
             className="w-full"
             options={categories}
+            multiple={multiple}
           />
+          <MultipleToggleInput
+            onToggle={handleToggleChange}
+            name="product"
+            register={register}
+            errors={errors}
+            label={"Multiple Category & Single Category"}
+            multiple={"Multiple"}
+            single={"Single"}
+          />
+          </div>
           <SelectInput
             label="Select Sellers"
             name="sellersIds"

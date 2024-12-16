@@ -6,7 +6,7 @@ export default function SelectInput({
   register,
   className = "sm:col-span-2",
   options = [],
-  multiple=false,
+  multiple,
 }) {
   return (
     <div className={className}>
