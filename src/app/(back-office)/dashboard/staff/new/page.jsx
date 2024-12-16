@@ -1,36 +1,16 @@
 "use client";
-import { makePostRequest } from "../../../../../../lib/apiRequest.js";
+import { makePostRequest } from "../../../../../lib/apiRequest.js";
 import FormHeader from "components/backoffice/FormHeader/FormHeader.jsx";
-import ImageInput from "components/Forminput/ImageInput.jsx";
 import SubmitButton from "components/Forminput/SubmitButton.jsx";
 import TextareaInput from "components/Forminput/TextareaInput.jsx";
 import TextInput from "components/Forminput/TextInput.jsx";
-import { generateSlug } from "../../../../../../lib/generateSlug.js";
+import { generateSlug } from "../../../../../lib/generateSlug.js";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import SelectInput from "components/Forminput/SelectInput.jsx";
 import ToggleInput from "components/Forminput/ToggleInput.jsx";
+import generateCouponCode from "lib/generateCouponCode.js";
 
-const NewCategory = () => {
-  const [imageUrl, setImageUrl] = useState("");
-  const markets = [
-    {
-      id: 1,
-      title: "Phone Sellers Market",
-    },
-    {
-      id: 2,
-      title: "Cloth Sellers Market",
-    },
-    {
-      id: 3,
-      title: "Laptop Sellers Market",
-    },
-    {
-      id: 4,
-      title: "Farmers Sellers Market",
-    },
-  ];
+const NewStaff = () => {
   const [loading, setLoading] = useState(false);
 
   const {
@@ -45,20 +25,27 @@ const NewCategory = () => {
 
   const isActive = watch("isActive");
   async function onSubmit(data) {
+    /* 
+          -name
+           -password
+           -email
+           -phone
+           -physicalAddress
+           -NIN Number
+           -Dob
+           -notes
+           -isActive 
+           */
+
     setLoading(true);
-    const slug = generateSlug(data?.name);
-    data.slug = slug;
-    data.imageUrl = imageUrl;
+    const code = generateCouponCode(
+      data.name,
+      data.nin
+    );
+    data.code = code;
     console.log(data);
 
-    makePostRequest(
-      setLoading,
-      "api/categories",
-      data,
-      "Category",
-      reset
-    );
-    setImageUrl("");
+    makePostRequest(setLoading, "api/staff", data, "Staffs", reset);
   }
   return (
     <div>
@@ -69,32 +56,62 @@ const NewCategory = () => {
       >
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput
-            label="Name"
+            label="Staff's  Full Name"
             name="name"
             register={register}
             errors={errors}
           />
-          <SelectInput
-            label="Select Markets"
-            name="marketsIds"
+          <TextInput
+            label="Password"
+            name="password"
             register={register}
             errors={errors}
             className="w-full"
-            options={markets}
-            multiple={false}
+          />
+          <TextInput
+            label="Staff's Email Address"
+            name="email"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <TextInput
+            label="Staff's Phone"
+            name="phone"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <TextInput
+            label="Staff's Physical Address"
+            name="physicalAddress"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <TextInput
+            label="NIN (Id Number)"
+            name="nin"
+            type="date"
+            register={register}
+            errors={errors}
+            className="w-full"
+          />
+          <TextInput
+            label="Date of Birth"
+            name="dob"
+            type="date"
+            register={register}
+            errors={errors}
+            className="w-full"
           />
           <TextareaInput
-            label="Category Description"
+            label="Notes"
             name="description"
             register={register}
             errors={errors}
           />
-          <ImageInput
-            imageUrl={imageUrl}
-            setImageUrl={setImageUrl}
-            endpoint="categoryImageUploader"
-            label={"Category Image"}
-          />
+
           {/* toggle input */}
           <ToggleInput
             name={"isActive"}
@@ -110,13 +127,8 @@ const NewCategory = () => {
           LoadingButtonTitle={"Creating Category Please Wait..."}
         />
       </form>
-
-      {/* -id
-           -title
-           -slug
-           -description-image */}
     </div>
   );
 };
 
-export default NewCategory;
+export default NewStaff;

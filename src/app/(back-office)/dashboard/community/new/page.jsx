@@ -41,7 +41,7 @@ const Training = () => {
 
   const onSubmit = async (data) => {
     setLoading(true);
-    const slug = generateSlug(data.name);
+    const slug = generateSlug(data.title);
     data.slug = slug;
     data.imageUrl = imageUrl;
     data.content = content;
@@ -49,12 +49,13 @@ const Training = () => {
 
     makePostRequest(
       setLoading,
-      "api/categories",
+      "api/trainings",
       data,
-      "Category",
+      "Training",
       reset
     );
     setImageUrl("");
+    setContent("");
   };
 
   return (
