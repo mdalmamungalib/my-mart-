@@ -10,11 +10,11 @@ import SelectInput from "components/Forminput/SelectInput.jsx";
 import ToggleInput from "components/Forminput/ToggleInput.jsx";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import QuillEditor from "components/Forminput/quillEditor.jsx";
+import QuillEditor from "components/Forminput/QuillEditor.jsx";
+export const dynamic = "force-dynamic";
+
 
 // Dynamically import ReactQuill
-
-
 
 const Training = () => {
   const [imageUrl, setImageUrl] = useState("");
@@ -37,9 +37,6 @@ const Training = () => {
     defaultValues: { isActive: true },
   });
 
-  
-
-
   const isActive = watch("isActive");
 
   const onSubmit = async (data) => {
@@ -50,7 +47,13 @@ const Training = () => {
     data.content = content;
     console.log(data);
 
-    makePostRequest(setLoading, "api/categories", data, "Category", reset);
+    makePostRequest(
+      setLoading,
+      "api/categories",
+      data,
+      "Category",
+      reset
+    );
     setImageUrl("");
   };
 
@@ -89,10 +92,11 @@ const Training = () => {
             endpoint="trainingImageUploader"
             label={"Training Thumbnail"}
           />
-           <QuillEditor label={"Training Content"}
-           value={content}
-           onChange={setContent}
-           />
+          <QuillEditor
+            label={"Training Content"}
+            value={content}
+            onChange={setContent}
+          />
           <ToggleInput
             name={"isActive"}
             register={register}
