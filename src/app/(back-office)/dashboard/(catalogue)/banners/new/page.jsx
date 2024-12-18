@@ -8,6 +8,7 @@ import TextInput from "components/Forminput/TextInput.jsx";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import ToggleInput from "components/Forminput/ToggleInput.jsx";
+import { useRouter } from "next/navigation.js";
 
 const NewBanner = () => {
   const [imageUrl, setImageUrl] = useState("");
@@ -23,6 +24,10 @@ const NewBanner = () => {
   });
 
   const isActive = watch("isActive");
+  // const router = useRouter();
+  // function redirect(){
+  //   router.push("/dashboard/banners")
+  // }
   async function onSubmit(data) {
     setLoading(true);
     data.imageUrl = imageUrl;
@@ -33,7 +38,8 @@ const NewBanner = () => {
       "api/banners",
       data,
       "Banner",
-      reset
+      reset,
+      "/dashboard/banners"
     );
     setImageUrl("");
   }
@@ -46,17 +52,18 @@ const NewBanner = () => {
       >
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput
-            label="Banner URL"
-            name="bannerUrl"
+            label="Banner Title"
+            name="title"
             register={register}
             errors={errors}
           />
-          <TextareaInput
-            label="Banner Description"
-            name="description"
+          <TextInput
+            label="Banner Link"
+            name="link"
             register={register}
             errors={errors}
           />
+          
           <ImageInput
             imageUrl={imageUrl}
             setImageUrl={setImageUrl}

@@ -7,6 +7,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import generateCouponCode from "../../../../../../lib/generateCouponCode.js";
 import ToggleInput from "components/Forminput/ToggleInput.jsx";
+import { generateisoFormattedDate } from "lib/generateisoFormattedDate.js";
+import { useRouter } from "next/navigation.js";
 
 const NewCoupons = () => {
   const [loading, setLoading] = useState(false);
@@ -21,15 +23,22 @@ const NewCoupons = () => {
     defaultValues: { isActive: true },
   });
   const isActive = watch("isActive");
+  // const router = useRouter();
+  // function redirect(){
+  //   router.push("/dashboard/coupons")
+  // }
+  
   async function onSubmit(data) {
     // setLoading(true);
 
     // data.slug = slug;
     // data.imageUrl = imageUrl;
     const couponCode = generateCouponCode(
-      data.campaignName,
-      data.couponValidityTime
+      data.title,
+      data.expiryDate
     );
+    const isoFormattedDate = generateisoFormattedDate(data.expiryDate);
+    data.expiryDate = isoFormattedDate;
     data.couponCode = couponCode;
     console.log(data);
 
@@ -38,7 +47,8 @@ const NewCoupons = () => {
       "api/coupons",
       data,
       "Coupon",
-      reset
+      reset,
+      "/dashboard/coupons"
     );
   }
   return (
@@ -51,14 +61,14 @@ const NewCoupons = () => {
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput
             label="Campaign Name"
-            name="campaignName"
+            name="title"
             register={register}
             errors={errors}
           />
 
           <TextInput
             label="Coupon validity time"
-            name="couponValidityTime"
+            name="expiryDate"
             type="date"
             register={register}
             errors={errors}

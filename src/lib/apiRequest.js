@@ -1,4 +1,4 @@
-// import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import toast from "react-hot-toast";
 
 export async function makePostRequest(
@@ -6,7 +6,8 @@ export async function makePostRequest(
   endpoint,
   data,
   resourceName,
-  reset
+  reset,
+  redirectEndpoint
 ) {
   try {
     setLoading(true);
@@ -24,6 +25,7 @@ export async function makePostRequest(
       setLoading(false);
       toast.success(`New ${resourceName} Created Successfully`);
       reset();
+      redirect(redirectEndpoint);
     } else {
       setLoading(false);
       if (response.status === 409) {

@@ -1,8 +1,19 @@
+import db from "lib/db";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
-    const newCoupon = await request.json();
+    const { title, couponCode, expiryDate, isActive } =
+      await request.json();
+
+    const newCoupon = await db.coupon.create({
+      data: {
+        title,
+        couponCode,
+        expiryDate,
+        isActive,
+      },
+    });
     console.log(newCoupon);
     return NextResponse.json(newCoupon);
   } catch (error) {
