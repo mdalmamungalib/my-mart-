@@ -13,24 +13,24 @@ import ToggleInput from "components/Forminput/ToggleInput.jsx";
 
 const NewCategory = () => {
   const [imageUrl, setImageUrl] = useState("");
-  const markets = [
-    {
-      id: 1,
-      title: "Phone Sellers Market",
-    },
-    {
-      id: 2,
-      title: "Cloth Sellers Market",
-    },
-    {
-      id: 3,
-      title: "Laptop Sellers Market",
-    },
-    {
-      id: 4,
-      title: "Farmers Sellers Market",
-    },
-  ];
+  // const markets = [
+  //   {
+  //     id: 1,
+  //     title: "Phone Sellers Market",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "Cloth Sellers Market",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "Laptop Sellers Market",
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "Farmers Sellers Market",
+  //   },
+  // ];
   const [loading, setLoading] = useState(false);
 
   const {
@@ -70,19 +70,11 @@ const NewCategory = () => {
         <div className="grid gap-4 sm:grid-cols-2 sm:gap-6">
           <TextInput
             label="Name"
-            name="name"
+            name="title"
             register={register}
             errors={errors}
           />
-          <SelectInput
-            label="Select Markets"
-            name="marketsIds"
-            register={register}
-            errors={errors}
-            className="w-full"
-            options={markets}
-            multiple={false}
-          />
+          
           <TextareaInput
             label="Category Description"
             name="description"

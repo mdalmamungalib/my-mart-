@@ -8,6 +8,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { makePostRequest } from "../../../../../lib/apiRequest.js";
 import generateUserCode from "../../../../../lib/generateUserCode.js";
+import { useRouter } from "next/navigation.js";
 
 const NewSeller = () => {
   // loading
@@ -24,7 +25,11 @@ const NewSeller = () => {
   });
 
   const isActive = watch("isActive");
-
+  const router = useRouter();
+  function redirect(){
+    router.push("/dashboard/sellers")
+  }
+  
   async function onSubmit(data) {
     setLoading(true);
     const code = generateUserCode(data.name);
@@ -35,7 +40,8 @@ const NewSeller = () => {
       "api/sellers",
       data,
       "Sellers",
-      reset
+      reset,
+      redirect
     );
   }
   return (
@@ -97,7 +103,7 @@ const NewSeller = () => {
           />
           <TextareaInput
             label="Seller's Payment Terms"
-            name="paymentTerms"
+            name="terms"
             register={register}
             errors={errors}
           />

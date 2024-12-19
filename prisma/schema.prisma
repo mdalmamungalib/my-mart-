@@ -32,3 +32,49 @@ model Banner {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+
+model Seller {
+  id                 String   @id @default(auto()) @map("_id") @db.ObjectId
+  code               String
+  isActive           Boolean
+  notes              String
+  terms              String
+  date               DateTime
+  contactPersonPhone String
+  contactPerson      String
+  sellersPhysical    String
+  email              String
+  phone              String
+  name               String
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model Category {
+   id       String    @id @default(auto()) @map("_id") @db.ObjectId
+  title      String 
+  slug       String @unique
+  imageUrl  String?
+  description String?   
+  
+  products  Product[]  
+  marketIds String[] @db.ObjectId
+  markets   Market[]   @relation(fields: [marketIds], references: [id])
+
+  createdAt DateTime  @default(now())
+  updatedAt DateTime? @updatedAt
+}
+
+model Market {
+  id          String     @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  slug       String @unique
+  logoUrl  String?
+  description String? 
+  
+  categoryIds String[]   @db.ObjectId
+  categories  Category[] @relation(fields: [categoryIds], references: [id])
+
+createdAt   DateTime   @default(now())
+  updatedAt   DateTime?  @updatedAt
+}

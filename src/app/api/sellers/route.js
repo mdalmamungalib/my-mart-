@@ -1,14 +1,45 @@
+import db from "../../../lib/db";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
   try {
-    const newSeller = await request.json();
-    console.log(newSeller);
-    return NextResponse.json(newSeller);
+    const {
+      code,
+      isActive,
+      notes,
+      terms,
+      date,
+      contactPersonPhone,
+      contactPerson,
+      sellersPhysical,
+      email,
+      phone,
+      name,
+    } = await request.json();
+    const newSellers = await db.seller.create({
+      data: {
+        code,
+        isActive,
+        notes,
+        terms,
+        date,
+        contactPersonPhone,
+        contactPerson,
+        sellersPhysical,
+        email,
+        phone,
+        name,
+      },
+    });
+    console.log(newSellers);
+    return NextResponse.json(newSellers);
   } catch (error) {
-    return NextResponse.json({
-      message: "Failed to create Seller",
-      error,
-    }, {status: 500});
+    return NextResponse.json(
+      {
+        message: "Failed to create Seller",
+        error,
+      },
+      { status: 500 }
+    );
   }
 }

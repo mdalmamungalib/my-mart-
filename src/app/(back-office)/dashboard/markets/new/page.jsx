@@ -9,10 +9,32 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import ToggleInput from "components/Forminput/ToggleInput.jsx";
 import TextareaInput from "components/Forminput/TextareaInput.jsx";
+import MultipleToggleInput from "components/Forminput/MultipleToggleInput.jsx";
+import SelectInput from "components/Forminput/SelectInput.jsx";
 
 const NewMarkets = () => {
   const [loading, setLoading] = useState(false);
   const [logoUrl, setLogoUrl] = useState("");
+  const [multiple, stMultiple] = useState(false);
+  
+  const handleToggleChange = (state) => {
+    stMultiple(state);
+  };
+  
+  const categories = [
+    {
+      id: 1,
+      title: "Category 1",
+    },
+    {
+      id: 2,
+      title: "Category 2",
+    },
+    {
+      id: 3,
+      title: "Category 3",
+    },
+  ];
 
   const {
     register,
@@ -52,7 +74,29 @@ const NewMarkets = () => {
             name="title"
             register={register}
             errors={errors}
+            className="w-full"
           />
+          <div>
+          
+          <SelectInput
+            label="Select Category"
+            name="categoryIds"
+            register={register}
+            errors={errors}
+            className="w-full"
+            options={categories}
+            multiple={multiple}
+          />
+          <MultipleToggleInput
+            onToggle={handleToggleChange}
+            name="product"
+            register={register}
+            errors={errors}
+            label={"Multiple Category & Single Category"}
+            multiple={"Multiple"}
+            single={"Single"}
+          />
+          </div>
           <ImageInput
             imageUrl={logoUrl}
             setImageUrl={setLogoUrl}

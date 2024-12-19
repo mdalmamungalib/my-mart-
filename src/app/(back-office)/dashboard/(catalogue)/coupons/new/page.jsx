@@ -23,10 +23,10 @@ const NewCoupons = () => {
     defaultValues: { isActive: true },
   });
   const isActive = watch("isActive");
-  // const router = useRouter();
-  // function redirect(){
-  //   router.push("/dashboard/coupons")
-  // }
+  const router = useRouter();
+  function redirect(){
+    router.push("/dashboard/coupons")
+  }
   
   async function onSubmit(data) {
     // setLoading(true);
@@ -48,7 +48,7 @@ const NewCoupons = () => {
       data,
       "Coupon",
       reset,
-      "/dashboard/coupons"
+      redirect
     );
   }
   return (

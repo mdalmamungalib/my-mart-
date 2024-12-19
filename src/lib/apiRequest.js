@@ -7,7 +7,7 @@ export async function makePostRequest(
   data,
   resourceName,
   reset,
-  redirectEndpoint
+  redirect
 ) {
   try {
     setLoading(true);
@@ -25,7 +25,7 @@ export async function makePostRequest(
       setLoading(false);
       toast.success(`New ${resourceName} Created Successfully`);
       reset();
-      redirect(redirectEndpoint);
+      redirect();
     } else {
       setLoading(false);
       if (response.status === 409) {
@@ -45,8 +45,8 @@ export async function makePutRequest(
   endpoint,
   data,
   resourceName,
+  reset,
   redirect,
-  reset
 ) {
   try {
     setLoading(true);
@@ -62,6 +62,7 @@ export async function makePutRequest(
       console.log(response);
       setLoading(false);
       toast.success(`${resourceName} Updated Successfully`);
+      reset();
       redirect();
     } else {
       setLoading(false);

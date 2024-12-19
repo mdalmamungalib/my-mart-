@@ -24,10 +24,10 @@ const NewBanner = () => {
   });
 
   const isActive = watch("isActive");
-  // const router = useRouter();
-  // function redirect(){
-  //   router.push("/dashboard/banners")
-  // }
+  const router = useRouter();
+  function redirect(){
+    router.push("/dashboard/banners")
+  }
   async function onSubmit(data) {
     setLoading(true);
     data.imageUrl = imageUrl;
@@ -39,7 +39,7 @@ const NewBanner = () => {
       data,
       "Banner",
       reset,
-      "/dashboard/banners"
+      redirect
     );
     setImageUrl("");
   }
