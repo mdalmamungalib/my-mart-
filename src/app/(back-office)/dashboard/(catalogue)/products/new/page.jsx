@@ -136,7 +136,7 @@ const NewProduct = () => {
           
           <SelectInput
             label="Select Category"
-            name="categoryIds"
+            name="categoryId"
             register={register}
             errors={errors}
             className="w-full"
@@ -155,7 +155,7 @@ const NewProduct = () => {
           </div>
           <SelectInput
             label="Select Sellers"
-            name="sellersIds"
+            name="sellerId"
             register={register}
             errors={errors}
             className="w-full"

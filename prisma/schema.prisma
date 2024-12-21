@@ -65,8 +65,17 @@ model Market {
 }
 
 model Product {
-  id    String @id @default(auto()) @map("_id") @db.ObjectId
-  title String @unique
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  isActive     Boolean
+  description  String
+  tags         String[]
+  imageUrl     String
+  salePrice    Float
+  productPrice Float
+  barcode      String
+  sku          String
+  title        String
+  slug         String   @unique
 
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId String   @db.ObjectId
