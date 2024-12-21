@@ -6,6 +6,7 @@ import React, { useEffect, useState } from "react";
 const ThemeSwitcherBtn = () => {
   const [mounted, setMounted] = useState(false);
   const { theme, setTheme } = useTheme();
+  
   useEffect(() => {
     setMounted(true);
   }, []);
