@@ -8,7 +8,6 @@ import {
   Slack,
   Users2,
   Store,
-  Gem,
   Settings,
   Radar,
   LogOut,
@@ -17,6 +16,8 @@ import {
   ChevronDown,
   Truck,
   Building2,
+  BookUser,
+  CircleUser,
 } from "lucide-react";
 import { usePathname } from "next/navigation";
 
@@ -42,7 +43,7 @@ const Sidebar = ({ showSidebar }) => {
     {
       title: "Sellers",
       link: "/dashboard/sellers",
-      icons: Gem,
+      icons: CircleUser,
     },
     {
       title: "Orders",
@@ -52,7 +53,7 @@ const Sidebar = ({ showSidebar }) => {
     {
       title: "Our Staff",
       link: "/dashboard/staff",
-      icons: Users2,
+      icons: BookUser,
     },
     {
       title: "Mart Community",

@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import SelectInput from "components/Forminput/SelectInput.jsx";
 import ToggleInput from "components/Forminput/ToggleInput.jsx";
+import { useRouter } from "next/navigation.js";
 
 const NewCategory = () => {
   const [imageUrl, setImageUrl] = useState("");
@@ -44,9 +45,13 @@ const NewCategory = () => {
   });
 
   const isActive = watch("isActive");
+  const router = useRouter();
+  function redirect() {
+    router.push("/dashboard/categories");
+  }
   async function onSubmit(data) {
     setLoading(true);
-    const slug = generateSlug(data?.name);
+    const slug = generateSlug(data?.title);
     data.slug = slug;
     data.imageUrl = imageUrl;
     console.log(data);
@@ -56,7 +61,8 @@ const NewCategory = () => {
       "api/categories",
       data,
       "Category",
-      reset
+      reset,
+      redirect
     );
     setImageUrl("");
   }
@@ -74,7 +80,7 @@ const NewCategory = () => {
             register={register}
             errors={errors}
           />
-          
+
           <TextareaInput
             label="Category Description"
             name="description"

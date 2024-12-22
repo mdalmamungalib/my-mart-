@@ -9,8 +9,10 @@ import { useForm } from "react-hook-form";
 import { makePostRequest } from "../../../../../lib/apiRequest.js";
 import generateUserCode from "../../../../../lib/generateUserCode.js";
 import { useRouter } from "next/navigation.js";
+import ImageInput from "components/Forminput/ImageInput.jsx";
 
 const NewSeller = () => {
+  const [profileImageUrl, setProfileImageUrl] = useState("");
   // loading
   const [loading, setLoading] = useState(false);
 
@@ -26,10 +28,10 @@ const NewSeller = () => {
 
   const isActive = watch("isActive");
   const router = useRouter();
-  function redirect(){
-    router.push("/dashboard/sellers")
+  function redirect() {
+    router.push("/dashboard/sellers");
   }
-  
+
   async function onSubmit(data) {
     setLoading(true);
     const code = generateUserCode(data.name);
@@ -101,6 +103,12 @@ const NewSeller = () => {
             errors={errors}
             className="w-full"
           />
+          <ImageInput
+            imageUrl={profileImageUrl}
+            setImageUrl={setProfileImageUrl}
+            endpoint="sellerProfileUploader"
+            label={"Seller's Profile Image"}
+          />
           <TextareaInput
             label="Seller's Payment Terms"
             name="terms"
@@ -133,18 +141,20 @@ const NewSeller = () => {
         />
       </form>
 
-      {/* -id
-           -title
-           -slug
-           -description
-           -images[]
-           -sku
-           -barcode
-           -productPrice
-           -selPrice
-           -category
-           -farmer
-           -tags[]
+      {/*
+        -id,
+        -isActive,
+        -description,
+        -tags,
+        -imageUrl,
+        -sellersIds,
+        -categoryIds,
+        -salePrice,
+        -productPrice,
+        -barcode,
+        -sku,
+        -title,
+        -slug,
            */}
     </div>
   );
