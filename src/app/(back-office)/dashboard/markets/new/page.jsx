@@ -120,7 +120,7 @@ const NewMarkets = () => {
         </div>
         <SubmitButton
           isLoading={loading}
-          buttonTitle={"Save Market"}
+          buttonTitle={"Create Market"}
           LoadingButtonTitle={"Creating Market Please Wait..."}
         />
       </form>

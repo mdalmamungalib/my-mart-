@@ -34,7 +34,7 @@ const NewSeller = () => {
 
   async function onSubmit(data) {
     setLoading(true);
-    const code = generateUserCode(data.name);
+    const code = generateUserCode("LFF", data.name);
     data.code = code;
     console.log(data);
     makePostRequest(

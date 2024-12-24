@@ -1,8 +1,8 @@
 "use client"
 import localFont from "next/font/local";
 import "../../../styles/main.scss";
-import Sidebar from "../../components/backoffice/Sidebar/Sidebar";
-import Navbar from "../../components/backoffice/Navbar/Navbar";
+import Sidebar from "components/backoffice/Sidebar/Sidebar";
+import Navbar from "components/backoffice/Navbar/Navbar";
 import { useState } from "react";
 
 const geistSans = localFont({
