@@ -2,14 +2,14 @@
 import { Plus } from "lucide-react";
 import React from "react";
 
-export default function SubmitButton({ isLoading=false, buttonTitle, LoadingButtonTitle }) {
+export default function SubmitButton({ isLoading=false, buttonTitle, LoadingButtonTitle, style }) {
   return (
     <div className="sm:col-span-1">
       {isLoading ? (
         <button
           disabled
           type="button"
-          className="mt-4 text-white bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800 inline-flex items-center"
+          className={`mt-4 text-white bg-lime-700 hover:bg-lime-800 focus:ring-4 focus:outline-none focus:ring-lime-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center mr-2 dark:bg-lime-600 dark:hover:bg-lime-700 dark:focus:ring-lime-800 inline-flex items-center ${style}`}
         >
           <svg
             aria-hidden="true"
@@ -33,7 +33,7 @@ export default function SubmitButton({ isLoading=false, buttonTitle, LoadingButt
       ) : (
         <button
           type="submit"
-          className="inline-flex items-center px-5 py-3 mt-4 text-sm font-medium text-center text-white rounded-lg sm:mt-6 focus:ring-4 focus:ring-lime-900 bg-lime-600 hover:bg-lime-800"
+          className={`inline-flex items-center px-5 py-3 mt-4 text-sm font-medium text-center text-white rounded-lg sm:mt-6 focus:ring-4 focus:ring-lime-900 bg-lime-600 hover:bg-lime-800 ${style}`}
         >
           <Plus className="w-5 h-5 mr-2" />
           <span>{buttonTitle}</span>

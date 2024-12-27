@@ -32,12 +32,18 @@ export default async function POST(request) {
       },
     });
     console.log(newUser);
-    return NextResponse.json(newUser);
+    return NextResponse.json(
+      {
+        data: newUser,
+        message: "User created successfully",
+      },
+      { status: 201 }
+    );
   } catch (error) {
     console.log(error);
     return NextResponse.json(
       {
-        message: "Failed to create a user",
+        message: "Server error: Something went wrong",
         error,
       },
       { status: 500 }
