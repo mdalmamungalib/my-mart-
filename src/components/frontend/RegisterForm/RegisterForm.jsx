@@ -33,11 +33,11 @@ export default function RegisterForm() {
 
       const responseData = await response.json();
       if (response.ok) {
-        console.log(newUser);
+        console.log(responseData);
         setLoading(false);
         toast.success("User Created Successfully");
         reset();
-        router.push("/login");
+        router.push("/");
       } else {
         setLoading(false);
         if (response.status === 409) {

@@ -1,8 +1,8 @@
-import db from "lib/db";
+import db from "../../../lib/db";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
 
-export default async function POST(request) {
+export async function POST(request) {
   try {
     //extract use credentials
     const { name, email, password } = await request.json();
@@ -13,11 +13,11 @@ export default async function POST(request) {
       },
     });
     if (existingUser) {
-      return (
-        NextResponse.json({
+      return NextResponse.json(
+        {
           data: null,
           message: "User already exists",
-        }),
+        },
         { status: 409 }
       );
     }
@@ -44,6 +44,25 @@ export default async function POST(request) {
     return NextResponse.json(
       {
         message: "Server error: Something went wrong",
+        error,
+      },
+      { status: 500 }
+    );
+  }
+}
+
+export async function GET(request) {
+  try {
+    const users = await db.user.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+    return NextResponse.json(users);
+  } catch (error) {
+    return NextResponse.json(
+      {
+        message: "Failed to create User",
         error,
       },
       { status: 500 }
